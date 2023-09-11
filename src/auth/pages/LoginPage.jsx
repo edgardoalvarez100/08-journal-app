@@ -1,9 +1,11 @@
-import { Link as RouterLink } from 'react-router-dom'
 import { useDispatch } from "react-redux";
+import { Link as RouterLink } from 'react-router-dom'
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { Google } from '@mui/icons-material'
+
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
+import { startGoogleSignIn, checkingAuthetication } from '../../store/auth';
 
 export const LoginPage = () => {
 
@@ -20,6 +22,7 @@ export const LoginPage = () => {
 
     const onGoogleSignIn = () => {
         console.log("onGoogleSignIn")
+        dispatch(startGoogleSignIn())
     }
 
     return (
@@ -39,13 +42,13 @@ export const LoginPage = () => {
 
                         <Grid container spacing={2} sx={{ mb: 2, mt: 1 }} >
                             <Grid item xs={12} sm={6}>
-                                <Button onClick={onGoogleSignIn} variant="contained" fullWidth type='submit'>
+                                <Button variant="contained" fullWidth type='submit'>
                                     Login
                                 </Button>
                             </Grid>
 
                             <Grid item xs={12} sm={6}>
-                                <Button variant="contained" fullWidth>
+                                <Button onClick={onGoogleSignIn} variant="contained" fullWidth>
                                     <Google />
                                     <Typography sx={{ ml: 1 }}>Google</Typography>
                                 </Button>
